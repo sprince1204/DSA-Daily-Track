@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums, int limit) {
+        deque<int> inc;
+        deque<int> dec;
+        int ans = 0;
+        int l = 0;
+
+        for (int r = 0; r < nums.size(); ++r) {
+            int num = nums[r];
+
+            while (!dec.empty() && num > dec.back()) {
+                dec.pop_back();
+            }
+            dec.push_back(num);
+
+            while (!inc.empty() && num < inc.back()) {
+                inc.pop_back();
+            }
+            inc.push_back(num);
+
+            while (dec.front() - inc.front() > limit) {
+                if (dec.front() == nums[l]) {
+                    dec.pop_front();
+                }
+                if (inc.front() == nums[l]) {
+                    inc.pop_front();
+                }
+                ++l;
+            }
+
+            ans = max(ans, r - l + 1);
+        }
+
+        return ans;
+    }
+};
