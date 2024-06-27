@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findCenter(vector<vector<int>>& edges) {
+        map<int, int> maps;
+        for(int i = 0; i<edges.size(); i++){
+            maps[edges[i][0]]++;
+            maps[edges[i][1]]++;
+        }
+        int nodes = 0;
+        for(auto it:maps){
+            nodes++;
+        }
+        for(auto it:maps){
+            if(it.second == nodes-1) return it.first;
+        }
+        return 1;
+    }
+};
