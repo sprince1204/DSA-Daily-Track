@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minOperations(vector<string>& logs) {
+        int n = logs.size();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+        string log = logs[i]; 
+
+        if (log == "../") {
+            if (ans > 0) { 
+            ans--;
+            }
+        } else if (log == "./") {
+            continue; 
+        }else{
+            ans++; 
+         }
+        }
+        return ans;
+    }
+};
