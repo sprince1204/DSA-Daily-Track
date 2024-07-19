@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+        vector<int> ans;
+        int n = matrix.size();
+        int m = matrix[0].size();
+
+        vector<int> rMin;
+        for(int i = 0; i<n; i++){
+            int roMin = INT_MAX;
+            for(int j = 0; j<m; j++){
+                roMin = min(roMin, matrix[i][j]);
+            }
+            rMin.push_back(roMin);
+        }
+        vector<int> cMax;
+        for(int i = 0; i<m; i++){
+            int coMax = INT_MIN;
+            for(int j = 0; j< n; j++){
+                coMax = max(coMax, matrix[j][i]);
+            }
+            cMax.push_back(coMax);
+        }
+        for(int i = 0;i<n; i++){
+            for(int j= 0; j<m; j++){
+                if(matrix[i][j] == rMin[i] && matrix[i][j] == cMax[j]){
+                    ans.push_back(matrix[i][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
